@@ -2,14 +2,19 @@ package com.jexhsu.consumer;
 
 import com.jexhsu.common.model.User;
 import com.jexhsu.common.service.UserService;
+import com.jexhsu.rpc.config.RpcConfig;
 import com.jexhsu.rpc.proxy.ServiceProxyFactory;
+import com.jexhsu.rpc.utils.ConfigUtils;
 
 /**
  * Simple service consumer example.
  */
-public class BasicConsumer {
+public class Consumer {
 
     public static void main(String[] args) {
+        RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
+        System.out.println(rpc);
+
         // Static proxy instance
         UserService staticProxy = new UserServiceProxy();
 
