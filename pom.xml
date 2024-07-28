@@ -12,7 +12,7 @@
         <module>common</module>
         <module>consumer</module>
         <module>provider</module>
-        <module>rpc</module>
+        <module>rpc-basic</module>
     </modules>
 
     <properties>

@@ -4,28 +4,31 @@ import com.jexhsu.common.model.User;
 import com.jexhsu.common.service.UserService;
 import com.jexhsu.rpc.proxy.ServiceProxyFactory;
 
-import java.lang.reflect.Method;
-
 /**
- * 简易服务消费者示例
+ * Simple service consumer example.
  */
 public class BasicConsumer {
 
     public static void main(String[] args) {
-        // 静态代理
-        UserService userService = new UserServiceProxy();
+        // Static proxy instance
+        UserService staticProxy = new UserServiceProxy();
 
-//        // 动态代理
-//        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
+        // Dynamic proxy instance
+        UserService dynamicProxy = ServiceProxyFactory.getProxy(UserService.class);
 
         User user = new User();
         user.setName("jexhsu");
-        // 调用
-        String str = userService.thumbs_up(user);
-        if (str != null) {
-            System.out.println(str);
+
+        printResult("Static Proxy", staticProxy.thumbs_up(user));
+
+        printResult("Dynamic Proxy", dynamicProxy.thumbs_up(user));
+    }
+
+    private static void printResult(String method, String res) {
+        if (res != null) {
+            System.out.println(method + " Result: " + res);
         } else {
-            System.out.println("user == null");
+            System.out.println(method + " error: Result is null.");
         }
     }
 }

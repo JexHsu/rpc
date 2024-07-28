@@ -9,7 +9,7 @@ import com.jexhsu.common.service.UserService;
 public class UserServiceImpl implements UserService {
 
     public String thumbs_up(User user) {
-        String str = " o(￣▽￣)ｄ you are the NO.1. \uD83D\uDC4D \uD83D\uDC4D \uD83D\uDC4D";
+        String str = " o(￣▽￣)ｄ you are the best. \uD83D\uDC4D \uD83D\uDC4D \uD83D\uDC4D";
         return  user.getName() + str;
     }
 }
