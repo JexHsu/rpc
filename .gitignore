@@ -1,0 +1,90 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store# Maven
+target/
+*.jar
+*.war
+*.ear
+*.class
+*.log
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+*.classpath
+*.project
+
+# Eclipse
+.settings/
+.project
+.metadata/
+*.classpath
+*.project
+
+# IntelliJ
+out/
+*.iml
+*.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# OS generated files
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Environment files
+.env
+*.env
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+*.rej
+*.tmp
+
