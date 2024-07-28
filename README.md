@@ -7,7 +7,7 @@ This project provides a basic RPC implementation in Java.
 - **common**: Shared models and services.
 - **consumer**: RPC client.
 - **provider**: RPC server.
-- **rpc**: RPC framework components.
+- **rpc-full**: RPC framework components.
 
 ## How to Build and Run
 
