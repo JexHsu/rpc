@@ -27,6 +27,9 @@ public class Consumer {
         printResult("Static Proxy", staticProxy.thumbs_up(user));
 
         printResult("Dynamic Proxy", dynamicProxy.thumbs_up(user));
+
+        long number = dynamicProxy.getNumber();
+        System.out.println("the number is " + number);
     }
 
     private static void printResult(String method, String res) {

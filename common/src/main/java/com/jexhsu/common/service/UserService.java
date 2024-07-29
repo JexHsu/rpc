@@ -14,4 +14,11 @@ public interface UserService {
      * @return
      */
     String thumbs_up(User user);
+
+    /**
+     * 新方法 - 获取数字
+     */
+    default short getNumber() {
+        return 1;
+    }
 }
