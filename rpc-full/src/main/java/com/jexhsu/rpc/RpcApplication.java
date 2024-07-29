@@ -1,7 +1,10 @@
 package com.jexhsu.rpc;
 
+import com.jexhsu.rpc.config.RegistryConfig;
 import com.jexhsu.rpc.config.RpcConfig;
 import com.jexhsu.rpc.constant.RpcConstant;
+import com.jexhsu.rpc.registry.Registry;
+import com.jexhsu.rpc.registry.RegistryFactory;
 import com.jexhsu.rpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +38,12 @@ public class RpcApplication {
      */
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
-        log.info("RPC init, default config = {}", newRpcConfig.toString());
+        log.info("rpc init, default config = {}", newRpcConfig.toString());
+        // 注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init, default config = {}", registryConfig);
     }
 
     /**
