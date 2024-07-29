@@ -1,50 +1,56 @@
 package com.jexhsu.rpc.server;
 
+import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * Mock 服务代理（JDK 动态代理）
+ * Mock service proxy using JDK dynamic proxies.
  */
 @Slf4j
 public class MockServiceProxy implements InvocationHandler {
 
+    private final Faker faker = new Faker();
+
     /**
-     * 调用代理
+     * Handles method calls on the proxy.
      *
-     * @return
+     * @return Default value based on the method's return type.
      * @throws Throwable
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // 根据方法的返回值类型，生成特定的默认值对象
-        Class<?> methodReturnType = method.getReturnType();
-        log.info("mock invoke {}", method.getName());
-        return getDefaultObject(methodReturnType);
+        Class<?> returnType = method.getReturnType();
+        log.info("Mock invoke {}", method.getName());
+        return generateDefaultValue(returnType);
     }
 
     /**
-     * 生成指定类型的默认值对象（可自行完善默认值逻辑）
+     * Generates default values based on the type.
      *
-     * @param type
-     * @return
+     * @param type Return type of the method.
+     * @return Default value for the given type.
      */
-    private Object getDefaultObject(Class<?> type) {
-        // 基本类型
+    private Object generateDefaultValue(Class<?> type) {
+        // Primitive types
         if (type.isPrimitive()) {
-            if (type == boolean.class) {
-                return false;
-            } else if (type == short.class) {
-                return (short) 0;
-            } else if (type == int.class) {
-                return 0;
-            } else if (type == long.class) {
-                return 0L;
-            }
+            if (type == boolean.class) return false;
+            if (type == short.class) return (short) 0;
+            if (type == int.class) return 0;
+            if (type == long.class) return 0L;
+            if (type == float.class) return 0.0f;
+            if (type == double.class) return 0.0;
         }
-        // 对象类型
+        // Object types
+        if (type == String.class) return faker.lorem().word();
+        if (type == Integer.class) return faker.number().randomDigit();
+        if (type == Long.class) return faker.number().randomNumber();
+        if (type == Double.class) return faker.number().randomDouble(2, 0, 100);
+        if (type == Boolean.class) return faker.bool().bool();
+        if (type == java.util.Date.class) return faker.date().birthday();
+        // Add more types as needed
         return null;
     }
 }

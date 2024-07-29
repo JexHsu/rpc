@@ -22,6 +22,7 @@
         <provider.version>1.0-SNAPSHOT</provider.version>
         <rpc-full.version>1.0-SNAPSHOT</rpc-full.version>
         <vertx-core.version>4.5.8</vertx-core.version>
+        <javafaker.version>1.0.2</javafaker.version>
         <logback-classic.version>1.3.12</logback-classic.version>
         <hutool-all.version>5.8.25</hutool-all.version>
         <lombok.version>1.18.30</lombok.version>
