@@ -15,28 +15,21 @@ public class Consumer {
         RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
         System.out.println(rpc);
 
-        // Static proxy instance
-        UserService staticProxy = new UserServiceProxy();
-
         // Dynamic proxy instance
         UserService dynamicProxy = ServiceProxyFactory.getProxy(UserService.class);
 
         User user = new User();
         user.setName("jexhsu");
 
-        printResult("Static Proxy", staticProxy.thumbs_up(user));
-
-        printResult("Dynamic Proxy", dynamicProxy.thumbs_up(user));
-
-        long number = dynamicProxy.getNumber();
-        System.out.println("the number is " + number);
-    }
-
-    private static void printResult(String method, String res) {
+        String res = dynamicProxy.thumbs_up(user);
         if (res != null) {
-            System.out.println(method + " Result: " + res);
+            System.out.println("Result: " + res);
         } else {
-            System.out.println(method + " error: Result is null.");
+            System.out.println("error: Result is null.");
         }
+
+        // if rpc.mock=true
+//        short number = dynamicProxy.getNumber();
+//        System.out.println("the number is " + number);
     }
 }

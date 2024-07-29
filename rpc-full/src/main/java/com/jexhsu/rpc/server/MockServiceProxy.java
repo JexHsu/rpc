@@ -43,12 +43,16 @@ public class MockServiceProxy implements InvocationHandler {
             if (type == float.class) return 0.0f;
             if (type == double.class) return 0.0;
         }
+        // Wrapper types
+        if (type == Boolean.class) return false;
+        if (type == Short.class) return (short) 0;
+        if (type == Integer.class) return 0;
+        if (type == Long.class) return 0L;
+        if (type == Float.class) return 0.0f;
+        if (type == Double.class) return 0.0;
+
         // Object types
         if (type == String.class) return faker.lorem().word();
-        if (type == Integer.class) return faker.number().randomDigit();
-        if (type == Long.class) return faker.number().randomNumber();
-        if (type == Double.class) return faker.number().randomDouble(2, 0, 100);
-        if (type == Boolean.class) return faker.bool().bool();
         if (type == java.util.Date.class) return faker.date().birthday();
         // Add more types as needed
         return null;

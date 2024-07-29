@@ -1,10 +1,12 @@
 package com.jexhsu.rpc.server;
 
+import com.jexhsu.rpc.RpcApplication;
 import com.jexhsu.rpc.model.RpcRequest;
 import com.jexhsu.rpc.model.RpcResponse;
 import com.jexhsu.rpc.registry.LocalRegistry;
 import com.jexhsu.rpc.serializer.JdkSerializer;
 import com.jexhsu.rpc.serializer.Serializer;
+import com.jexhsu.rpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -21,7 +23,15 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
         // 指定序列化器
-        final Serializer serializer = new JdkSerializer();
+
+//        // 1. 硬编码序列化器实例
+//        final Serializer serializer = new JdkSerializer();
+        // 2. 从自定义 SPI 工厂获取序列化器
+        final Serializer serializer = SerializerFactory
+                .getInstance(RpcApplication.getRpcConfig()
+                        .getSerializer());
+//        // 3. 使用 Java 内置 SPI 机制获取序列化器
+//        final Serializer serializer = SerializerFactory.getSerializer();
 
         // 记录日志
         System.out.println("Received request: " + request.method() + " " + request.uri());

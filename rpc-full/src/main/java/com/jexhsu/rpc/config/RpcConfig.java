@@ -1,5 +1,6 @@
 package com.jexhsu.rpc.config;
 
+import com.jexhsu.rpc.serializer.SerializerKeys;
 import lombok.Data;
 
 /**
@@ -16,7 +17,7 @@ public class RpcConfig {
     /**
      * 版本号
      */
-    private String version = "1.0";
+    private String version = "2.0";
 
     /**
      * 服务器主机名
@@ -32,5 +33,10 @@ public class RpcConfig {
      * 模拟调用
      */
     private boolean mock = false;
+
+    /**
+     * 序列化器
+     */
+    private String serializer = SerializerKeys.HESSIAN;
 
 }
