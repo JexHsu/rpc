@@ -3,7 +3,9 @@ package com.jexhsu.rpc.registry;
 import com.jexhsu.rpc.config.RegistryConfig;
 import com.jexhsu.rpc.model.ServiceMetaInfo;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 注册中心
@@ -43,4 +45,9 @@ public interface Registry {
      * 服务销毁
      */
     void destroy();
+
+    /**
+     * 心跳检测（服务端）
+     */
+    void heartBeat();
 }
