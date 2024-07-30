@@ -73,6 +73,12 @@
             <artifactId>jetcd-core</artifactId>
            <version>${etcd-core.version}</version>
         </dependency>
+        <!-- zookeeper -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-x-discovery</artifactId>
+            <version>${curator-x-discovery.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
