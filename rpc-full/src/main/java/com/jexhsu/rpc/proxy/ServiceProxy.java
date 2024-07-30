@@ -1,6 +1,7 @@
 package com.jexhsu.rpc.proxy;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.jexhsu.rpc.RpcApplication;
@@ -9,16 +10,22 @@ import com.jexhsu.rpc.constant.RpcConstant;
 import com.jexhsu.rpc.model.RpcRequest;
 import com.jexhsu.rpc.model.RpcResponse;
 import com.jexhsu.rpc.model.ServiceMetaInfo;
+import com.jexhsu.rpc.protocol.*;
 import com.jexhsu.rpc.registry.Registry;
 import com.jexhsu.rpc.registry.RegistryFactory;
+import com.jexhsu.rpc.server.tcp.VertxTcpClient;
 import com.jexhsu.rpc.serializer.JdkSerializer;
 import com.jexhsu.rpc.serializer.Serializer;
 import com.jexhsu.rpc.serializer.SerializerFactory;
+import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.net.NetClient;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 服务代理（JDK 动态代理）
@@ -67,19 +74,20 @@ public class ServiceProxy implements InvocationHandler {
             }
             // 暂时先取第一个
             ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
-            // 发送请求
-            try (HttpResponse httpResponse = HttpRequest.post(selectedServiceMetaInfo.getServiceAddress())
-                    .body(bodyBytes)
-                    .execute()) {
-                byte[] result = httpResponse.bodyBytes();
-                // 反序列化
-                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
-                return rpcResponse.getData();
-            }
+            // 发送 TCP 请求
+            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            return rpcResponse.getData();
+            // 发送 http 请求
+//            try (HttpResponse httpResponse = HttpRequest.post(selectedServiceMetaInfo.getServiceAddress())
+//                    .body(bodyBytes)
+//                    .execute()) {
+//                byte[] result = httpResponse.bodyBytes();
+//                // 反序列化
+//                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
+//                return rpcResponse.getData();
+//            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("调用失败");
         }
-
-        return null;
     }
 }

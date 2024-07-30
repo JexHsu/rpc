@@ -11,6 +11,7 @@ import com.jexhsu.rpc.registry.Registry;
 import com.jexhsu.rpc.registry.RegistryFactory;
 import com.jexhsu.rpc.server.HttpServer;
 import com.jexhsu.rpc.server.VertxHttpServer;
+import com.jexhsu.rpc.server.tcp.VertxTcpServer;
 
 /**
  * 简易服务提供者示例
@@ -40,7 +41,11 @@ public class Provider {
         }
 
         // 启动 web 服务
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+//        HttpServer httpServer = new VertxHttpServer();
+//        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+
+        // 启动 TCP 服务
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
     }
 }
