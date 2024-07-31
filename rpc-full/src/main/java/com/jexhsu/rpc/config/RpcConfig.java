@@ -1,5 +1,7 @@
 package com.jexhsu.rpc.config;
 
+import com.jexhsu.rpc.loadbalancer.LoadBalancer;
+import com.jexhsu.rpc.loadbalancer.LoadBalancerKeys;
 import com.jexhsu.rpc.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -43,5 +45,10 @@ public class RpcConfig {
      * 注册中心配置
      */
     private RegistryConfig registryConfig = new RegistryConfig();
+
+    /**
+     * 复杂均衡器
+     */
+    private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
 
 }

@@ -1,0 +1,3 @@
+roundRobin=com.jexhsu.rpc.loadbalancer.RoundRobin
+random=com.jexhsu.rpc.loadbalancer.Random
+consistentHash=com.jexhsu.rpc.loadbalancer.ConsistentHash
