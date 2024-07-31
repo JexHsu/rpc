@@ -1,5 +1,6 @@
 package com.jexhsu.rpc.config;
 
+import com.jexhsu.rpc.fault.retry.RetryStrategyKeys;
 import com.jexhsu.rpc.loadbalancer.LoadBalancer;
 import com.jexhsu.rpc.loadbalancer.LoadBalancerKeys;
 import com.jexhsu.rpc.serializer.SerializerKeys;
@@ -50,5 +51,10 @@ public class RpcConfig {
      * 复杂均衡器
      */
     private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NOTHING;
 
 }

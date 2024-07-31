@@ -79,6 +79,11 @@
             <artifactId>curator-x-discovery</artifactId>
             <version>${curator-x-discovery.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.rholder</groupId>
+            <artifactId>guava-retrying</artifactId>
+            <version>${guava-retrying.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

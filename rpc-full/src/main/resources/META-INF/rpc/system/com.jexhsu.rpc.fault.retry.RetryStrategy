@@ -1,0 +1,2 @@
+nothing=com.jexhsu.rpc.fault.retry.Nothing
+fixedInterval=com.jexhsu.rpc.fault.retry.FixedInterval
