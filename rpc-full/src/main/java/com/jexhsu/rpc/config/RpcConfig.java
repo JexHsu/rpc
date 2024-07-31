@@ -1,6 +1,7 @@
 package com.jexhsu.rpc.config;
 
 import com.jexhsu.rpc.fault.retry.RetryStrategyKeys;
+import com.jexhsu.rpc.fault.tolerant.TolerantStrategyKeys;
 import com.jexhsu.rpc.loadbalancer.LoadBalancer;
 import com.jexhsu.rpc.loadbalancer.LoadBalancerKeys;
 import com.jexhsu.rpc.serializer.SerializerKeys;
@@ -56,5 +57,10 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NOTHING;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 
 }

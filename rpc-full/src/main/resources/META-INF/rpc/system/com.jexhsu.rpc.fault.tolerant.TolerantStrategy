@@ -1,0 +1,4 @@
+failBack=com.jexhsu.rpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.jexhsu.rpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.jexhsu.rpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.jexhsu.rpc.fault.tolerant.FailSafeTolerantStrategy
