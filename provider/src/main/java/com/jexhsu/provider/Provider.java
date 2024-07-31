@@ -2,16 +2,11 @@ package com.jexhsu.provider;
 
 
 import com.jexhsu.common.service.UserService;
-import com.jexhsu.rpc.RpcApplication;
-import com.jexhsu.rpc.config.RegistryConfig;
-import com.jexhsu.rpc.config.RpcConfig;
-import com.jexhsu.rpc.model.ServiceMetaInfo;
-import com.jexhsu.rpc.registry.LocalRegistry;
-import com.jexhsu.rpc.registry.Registry;
-import com.jexhsu.rpc.registry.RegistryFactory;
-import com.jexhsu.rpc.server.HttpServer;
-import com.jexhsu.rpc.server.VertxHttpServer;
-import com.jexhsu.rpc.server.tcp.VertxTcpServer;
+import com.jexhsu.rpc.bootstrap.ProviderBootStrap;
+import com.jexhsu.rpc.model.ServiceRegisterInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 简易服务提供者示例
@@ -19,33 +14,13 @@ import com.jexhsu.rpc.server.tcp.VertxTcpServer;
 public class Provider {
 
     public static void main(String[] args) {
-        // RPC 框架初始化
-        RpcApplication.init();
-
-        // 注册服务
+        // 要注册的服务
+        List<ServiceRegisterInfo<?>> serviceRegisterInfoList = new ArrayList<>();
         String serviceName = UserService.class.getName();
-        LocalRegistry.register(serviceName, UserServiceImpl.class);
-
-        // 注册服务到注册中心
-        RpcConfig rpcConfig = RpcApplication.getRpcConfig();
-        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
-        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
-        ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
-        serviceMetaInfo.setServiceName(serviceName);
-        serviceMetaInfo.setServiceHost(rpcConfig.getServerHost());
-        serviceMetaInfo.setServicePort(rpcConfig.getServerPort());
-        try {
-            registry.register(serviceMetaInfo);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        // 启动 web 服务
-//        HttpServer httpServer = new VertxHttpServer();
-//        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
-
-        // 启动 TCP 服务
-        VertxTcpServer vertxTcpServer = new VertxTcpServer();
-        vertxTcpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+        Class<UserServiceImpl> implClass = UserServiceImpl.class;
+        ServiceRegisterInfo serviceRegisterInfo = new ServiceRegisterInfo(serviceName, implClass);
+        serviceRegisterInfoList.add(serviceRegisterInfo);
+        // 服务提供者初始化
+        ProviderBootStrap.init(serviceRegisterInfoList);
     }
 }

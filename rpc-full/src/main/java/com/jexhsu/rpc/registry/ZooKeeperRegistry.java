@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 
 /**
  * zookeeper 注册中心
- * 操作文档：<a href="https://curator.apache.org/docs/getting-started">Apache Curator</a>
- * 代码示例：<a href="https://github.com/apache/curator/blob/master/curator-examples/src/main/java/discovery/DiscoveryExample.java">DiscoveryExample.java</a>
- * 监听 key 示例：<a href="https://github.com/apache/curator/blob/master/curator-examples/src/main/java/cache/CuratorCacheExample.java">CuratorCacheExample.java</a>
+ * 操作文档：<ServiceRegisterInfo href="https://curator.apache.org/docs/getting-started">Apache Curator</ServiceRegisterInfo>
+ * 代码示例：<ServiceRegisterInfo href="https://github.com/apache/curator/blob/master/curator-examples/src/main/java/discovery/DiscoveryExample.java">DiscoveryExample.java</ServiceRegisterInfo>
+ * 监听 key 示例：<ServiceRegisterInfo href="https://github.com/apache/curator/blob/master/curator-examples/src/main/java/cache/CuratorCacheExample.java">CuratorCacheExample.java</ServiceRegisterInfo>
  */
 @Slf4j
 public class ZooKeeperRegistry implements Registry {
